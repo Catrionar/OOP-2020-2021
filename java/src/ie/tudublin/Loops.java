@@ -89,12 +89,11 @@ public class Loops extends PApplet {
             {
                 int numSquares = (int)(mouseX / 10.0f);
                 float w = width / (float) numSquares;
-                float h = height / (float) numSquares;
                 float cgap = 255 / (float) numSquares;
                 for(int i = 0 ; i < numSquares ; i ++)
                 {
                     fill(cgap * i, 255, 255);
-                    rect(i * w, i * h, w, h);
+                    rect(i * w, i * w, w, w);
                 }
                 break;
             }
@@ -108,7 +107,7 @@ public class Loops extends PApplet {
                 {
                     fill(cgap * i, 255, 255);
                     rect(i * w, i * h, w, h);
-                    rect(width - (i * w), (i * h), w, w);
+                    rect(width - ((i + 1) * w), (i * h), w, w);
                 }
                 break;
             }
@@ -127,19 +126,34 @@ public class Loops extends PApplet {
             {
                 int numCircles = (int)(mouseX / 10.0f);
                 float w = width / (float) numCircles;
-                float h = height / (float) numCircles;
-                float cgap = 255 / (float) numCircles;
+                float cgap = 255 / (float) (numCircles + numCircles);
                 for(int i = 0 ; i < numCircles ; i ++)
                 {
-                    fill(cgap * i, 255, 255);
                     for(int j = 0 ; j < numCircles ; j ++)
                     {
-                        ellipse(w / 2 + (i * w), h / 2 + (j * h), w, w);
+                        fill(cgap * (i+j), 255, 255);
+                        ellipse(w / 2 + (i * w), w / 2 + (j * w), w, w);
                     }
                 }
                 break;
             }
-            case 8: 
+            case 8:
+            {
+                int sides = (mouseX / 50);
+                float theta = TWO_PI / (float) sides;
+                float radius = 200;
+                stroke(255);
+                for(int i = 1; i <= sides; i++)
+                {
+                    float x1 = sin(theta * (i - 1)) * radius;
+                    float y1 = cos(theta * (i - 1)) * radius;
+                    float x2 = sin(theta * i) * radius;
+                    float y2 = cos(theta * i) * radius;
+                    line(cx + x1, cy + y1, cx + x2, cy + y2);
+                }
+                break;
+            }
+            case 9: 
             {
                 int numLines = 5;
                 float theta = TWO_PI / (float) numLines;

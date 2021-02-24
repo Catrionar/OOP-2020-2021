@@ -9,6 +9,7 @@ public class Life extends PApplet {
     boolean[][] board = new boolean[size][size];
     boolean[][] next = new boolean[size][size];
 
+
     public int countNeighbours(int row, int col)
     {
         int count = 0;
@@ -152,16 +153,27 @@ public class Life extends PApplet {
     public void keyPressed() {
         if (keyCode == ' ')
         {
+            //paused = true;
         }
         
         if (keyCode == '1')
         {
+            randomize();
         }
         if (keyCode == '2')
         {
+            for(int row = 0 ; row < size ; row ++)
+            {
+                for (int col = 0 ; col < size ; col ++)
+                {
+                    board[row][col] = false;
+                }
+            }    
         }
         if (keyCode == '3')
         {
+            drawBoard(board);
+            updateBoard();
         }
             
     }
@@ -184,8 +196,40 @@ public class Life extends PApplet {
 
     private void updateBoard()
     {
+        frameRate(20);
         // Put code here to apply the rules!!
-
+        for(int row = 0 ; row < size ; row ++)
+        {
+            for (int col = 0 ; col < size ; col ++)
+            {
+                if(board[row][col] == true)
+                {
+                    if(countNeighbours(row, col) == 2 )
+                    {
+                        next[row][col] = true;
+                    }
+                    else if(countNeighbours(row, col) == 3)
+                    {
+                        next[row][col] = true;
+                    }
+                    else
+                    {
+                        next[row][col] = false;
+                    }
+                }
+                else 
+                {
+                    if(countNeighbours(row, col) == 3)
+                    {
+                        next[row][col] = true;
+                    }
+                    else
+                    {
+                        next[row][col] = false;
+                    }
+                }
+            }
+        }       
         
         // Swap board and next
         boolean[][] temp = board;
@@ -196,6 +240,10 @@ public class Life extends PApplet {
     public void mouseDragged()
     {
         // This method gets called automatically when the mouse is dragged across the screen
+        int x = (int) map(mouseX, 0, width, 0, size);
+        int y = (int) map(mouseY, 0, height, 0, size);
+
+        board[y][x] = true;
     }
 
     public void draw() {

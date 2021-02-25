@@ -69,7 +69,7 @@ public class Life extends PApplet {
 
     public void setCell(boolean[][] board, int row, int col, boolean b)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size && col >= 0 && col < size)
         {
             board[row][col] = b;
         }
@@ -77,7 +77,7 @@ public class Life extends PApplet {
 
     public boolean getCell(boolean[][] board, int row, int col)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size && col >= 0 && col < size)
         {
             return board[row][col];
         }
@@ -153,7 +153,7 @@ public class Life extends PApplet {
     public void keyPressed() {
         if (keyCode == ' ')
         {
-            //paused = true;
+            paused = ! paused;
         }
         
         if (keyCode == '1')
@@ -175,7 +175,19 @@ public class Life extends PApplet {
             drawBoard(board);
             updateBoard();
         }
-            
+        if (keyCode == '4')
+        {
+            drawCross();
+        } 
+    }
+
+    public void drawCross()
+    {
+        for(int i = 0; i < size; i++)
+        {
+            setCell(board, size/2, i, true);
+            setCell(board, i, size, true);
+        }
     }
 
     public void setup() {
@@ -248,7 +260,10 @@ public class Life extends PApplet {
 
     public void draw() {
         background(0);
-        drawBoard(board);        
-        updateBoard();
+        drawBoard(board);  
+        if (! paused)
+        {      
+            updateBoard();
+        }
     }
 }

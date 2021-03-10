@@ -17,7 +17,7 @@ public class Audio1 extends PApplet {
 
     public void settings() {
         size(512, 512);
-        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -82,6 +82,7 @@ public class Audio1 extends PApplet {
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, halfHeight + lerpedBuffer[i] * halfHeight * 4, i);
                 }
 
+                /*
                 // See the difference lerping makes? It smooths out the jitteryness of average, so the visual looks smoother
                 ellipse(width / 4, 100, average * 500, average * 500);
                 ellipse(width / 2, 100, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
@@ -91,27 +92,66 @@ public class Audio1 extends PApplet {
                 ellipse(300, lerpedY, 30, 30);
                 y += random(-10, 10);
                 lerpedY = lerp(lerpedY, y, 0.1f);
+                */
                 break;
             }   
             case 1:
             {
+                for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                }
                 break;
             }
             case 2:
-            {
+            { 
+                for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                    line(i, height - lerpedBuffer[i] * height * 3, i, height + lerpedBuffer[i] * height * 3);
+                    line(i, 1 + lerpedBuffer[i] * (height*3), i, 1 - lerpedBuffer[i] * (height*3));
+                    line(width - lerpedBuffer[i] * width * 3, i, width + lerpedBuffer[i] * width * 3, i);
+                    line(1 + lerpedBuffer[i] * (width*3), i, 1 - lerpedBuffer[i] * (width*3), i);
+                }
                 break;
             }
             case 3:
             {
+                stroke(150, 255, 255);
+                fill(0);
+                ellipseMode(CENTER);
+                ellipse(width / 2 , halfHeight, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
                 break;
             }
             case 4:
             {
+                stroke(150, 255, 255);
+                fill(0);
+                rectMode(CENTER);
+                rect(width / 2 , halfHeight, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
                 break;
             }
             case 5:
             {
                 // ??
+                for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                    line(0, halfHeight - lerpedBuffer[i] * (halfHeight*3), width/3, halfHeight + lerpedBuffer[i] * (halfHeight*3));
+                    line(width/3, halfHeight + lerpedBuffer[i] * (halfHeight*3), 2 * (width/3), halfHeight - lerpedBuffer[i] * (halfHeight*3));
+                    line(2 * (width/3), halfHeight - lerpedBuffer[i] * (halfHeight*3), width, halfHeight + lerpedBuffer[i] * (halfHeight*3));
+                    //line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                }
                 break;
             }
         }        

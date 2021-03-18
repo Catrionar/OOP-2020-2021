@@ -34,7 +34,7 @@ public class Audio2 extends PApplet {
       }
 
     public void settings() {
-        size(1024, 1024);
+        size(512, 512, P2D);
         //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
@@ -52,7 +52,20 @@ public class Audio2 extends PApplet {
     {
         // Return the element from the spellings array that freq is closest 
         // to in the frequency array
-        return "";
+
+        int closestIndex = 0;
+        float smallestGap = Float.MAX_VALUE;
+        for(int i = 0; i <= frequencies.length; i++)
+        {
+            float difference = abs(freq - frequencies[i]);
+            if(difference < smallestGap)
+            {
+                smallestGap = difference;
+                closestIndex = i;
+            }
+            
+        }
+        return spellings[closestIndex];
     }
 
     float log2(float f) {
@@ -126,6 +139,8 @@ public class Audio2 extends PApplet {
         text("Note: " + spell(freq), 10, 100);
 
         calculateFrequencyBands();
+
+        //spell(freq);
 
         /*
         float w = width / (float) bands.length;

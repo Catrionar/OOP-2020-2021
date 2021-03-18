@@ -16,8 +16,8 @@ public class Audio1 extends PApplet {
     float[] lerpedBuffer;
 
     public void settings() {
-        //size(512, 512, P3D);
-        fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        size(512, 512, P3D);
+        //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -38,7 +38,7 @@ public class Audio1 extends PApplet {
     }
 
     public void keyPressed() {
-        if (keyCode >= '0' && keyCode <= '5') {
+        if (keyCode >= '0' && keyCode <= '6') {
             which = keyCode - '0';
         }
         if (keyCode == ' ') {
@@ -52,6 +52,7 @@ public class Audio1 extends PApplet {
     }
 
     float lerpedAverage = 0;
+    private float angle = 0;
 
     public void draw() {
         background(0);
@@ -153,6 +154,21 @@ public class Audio1 extends PApplet {
                 }
                 // ??
                 break;
+            }
+            case 6:
+            {
+                translate(width/2, height/2, 0);
+                rotateX(angle);
+                rotateY(angle);
+                lights();
+                strokeWeight(2);
+                float c = map(lerpedAverage, 0, 1, 0, 255);
+                stroke(c, 255, 255);
+                noFill();
+                //fill(155, 255, 255);
+                angle += 0.01f;
+                float s = 100 + (100 * lerpedAverage * 10);
+                box(s);
             }
         }        
     }

@@ -12,6 +12,7 @@ public class YASC extends PApplet {
     // Write movePlayer
 
     Player p;
+    Health h;
 
     public void settings() {
         size(500, 500);
@@ -19,6 +20,7 @@ public class YASC extends PApplet {
 
     public void setup() {
         p = new Player(this, width / 2, height / 2);
+        h = new Health(this, p);
     }
 
     public void draw() {
@@ -26,6 +28,10 @@ public class YASC extends PApplet {
         stroke(255);
         p.update();
         p.render();
+
+        h.healthValue();
+        h.update();
+        h.render();
         
         // Check collisions        
         checkCollisions();

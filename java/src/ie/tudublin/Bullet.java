@@ -7,6 +7,7 @@ public class Bullet {
     float dx, dy;
     float rotation = 0;
     float speed = 5;
+    
     YASC yasc;
 
     public Bullet(YASC yasc, float x, float y, float rotation)
@@ -16,6 +17,7 @@ public class Bullet {
         this.rotation = rotation;
         this.yasc = yasc;
     }
+
 
     public void render()
     {
@@ -34,6 +36,24 @@ public class Bullet {
 
         x += dx * speed;
         y += dy * speed;
+
+        if (x < 0)
+        {
+            x = yasc.width;
+        }
+        if (x > yasc.width)
+        {
+            x = 0;
+        }
+
+        if (y < 0)
+        {
+            y = yasc.height;
+        }
+        if (y > yasc.height)
+        {
+            y = 0;
+        }
     }
 
 

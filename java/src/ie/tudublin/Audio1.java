@@ -16,8 +16,8 @@ public class Audio1 extends PApplet {
     float[] lerpedBuffer;
 
     public void settings() {
-        //size(1000, 1000, P3D);
-        fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        size(1000, 1000, P3D);
+        //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -127,7 +127,7 @@ public class Audio1 extends PApplet {
                 //ellipse(width / 4, 100, 50 + average * 500, 50 + average * 500);
                 ellipse(width / 2, height / 2, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));                
                 break;
-            }
+            } 
             case 4:
             {
                 float c = map(average, 0, 1, 0, 255);
